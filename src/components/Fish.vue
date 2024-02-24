@@ -61,14 +61,40 @@ export default {
             isLockedIn: false,
             areButtonsDisabled: false,
             userAnswers: {},
-            fishList: []
+            fishList: [
+                { index: 1, lockedIn: true },
+                { index: 2, lockedIn: false },
+                { index: 3, lockedIn: false },
+                { index: 4, lockedIn: true },
+                { index: 5, lockedIn: false },
+                { index: 6, lockedIn: true },
+                { index: 7, lockedIn: false },
+                { index: 8, lockedIn: true },
+                { index: 9, lockedIn: true },
+                { index: 10, lockedIn: true },
+                { index: 11, lockedIn: true },
+                { index: 12, lockedIn: true },
+                { index: 13, lockedIn: false },
+                { index: 14, lockedIn: true },
+                { index: 15, lockedIn: true },
+                { index: 16, lockedIn: true },
+                { index: 17, lockedIn: false },
+                { index: 18, lockedIn: true },
+                { index: 19, lockedIn: false },
+                { index: 20, lockedIn: false },
+                { index: 21, lockedIn: false },
+                { index: 22, lockedIn: false },
+                { index: 23, lockedIn: false },
+                { index: 24, lockedIn: false },
+                { index: 25, lockedIn: false }
+            ]
         };
     },
     created() {
         for (let i = 1; i <= this.imageCount; i++) {
             this.fishList.push({
                 index: i,
-                lockedIn: i === 1 // Example: Fish 1 is locked in, others are not
+                lockedIn: i === 1
             });
         }
         this.loadNextFish();
@@ -95,6 +121,8 @@ export default {
             this.areButtonsDisabled = true;
 
             const correctAnswer = this.fishList.find(fish => fish.index === this.currentFishIndex).lockedIn;
+            const currentFish = this.fishList.find(fish => fish.index === this.currentFishIndex);
+            const isLockedIn = currentFish.lockedIn;
             this.userAnswers[this.currentFishIndex] = userAnswer;
             this.isLockedIn = userAnswer;
 
@@ -118,6 +146,7 @@ export default {
 
             this.areButtonsDisabled = false;
         }
+
     }
 };
 </script>
