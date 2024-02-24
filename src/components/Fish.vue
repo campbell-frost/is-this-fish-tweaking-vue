@@ -1,5 +1,5 @@
 <template>
-    <div class="container-md w-50">
+    <div class="container-md w-50 mr-5 px-5">
         <h1 class="text-center pb-3">Is this fish locked in or tweaking?</h1>
 
         <div class="text-center">
@@ -51,7 +51,7 @@
 export default {
     data() {
         return {
-            imageCount: 25,
+            imageCount: 23,
             currentFishIndex: 1,
             counterIndex: 0,
             showResult: false,
@@ -71,22 +71,20 @@ export default {
                 { index: 7, lockedIn: false },
                 { index: 8, lockedIn: true },
                 { index: 9, lockedIn: true },
-                { index: 10, lockedIn: true },
+                { index: 10, lockedIn: false },
                 { index: 11, lockedIn: true },
-                { index: 12, lockedIn: true },
+                { index: 12, lockedIn: false },
                 { index: 13, lockedIn: false },
                 { index: 14, lockedIn: true },
                 { index: 15, lockedIn: true },
                 { index: 16, lockedIn: true },
                 { index: 17, lockedIn: false },
-                { index: 18, lockedIn: true },
+                { index: 18, lockedIn: false },
                 { index: 19, lockedIn: false },
                 { index: 20, lockedIn: false },
                 { index: 21, lockedIn: false },
                 { index: 22, lockedIn: false },
                 { index: 23, lockedIn: false },
-                { index: 24, lockedIn: false },
-                { index: 25, lockedIn: false }
             ]
         };
     },
@@ -120,11 +118,8 @@ export default {
             if (this.areButtonsDisabled) return;
             this.areButtonsDisabled = true;
 
-            const correctAnswer = this.fishList.find(fish => fish.index === this.currentFishIndex).lockedIn;
             const currentFish = this.fishList.find(fish => fish.index === this.currentFishIndex);
-            const isLockedIn = currentFish.lockedIn;
-            this.userAnswers[this.currentFishIndex] = userAnswer;
-            this.isLockedIn = userAnswer;
+            const correctAnswer = currentFish.lockedIn;
 
             if (userAnswer === correctAnswer) {
                 this.resultMessage = 'Correct';
@@ -135,6 +130,7 @@ export default {
                 this.correct = false;
             }
 
+            this.isLockedIn = currentFish.lockedIn;
             this.showResult = true;
             await new Promise(resolve => setTimeout(resolve, 2000));
 
@@ -146,6 +142,7 @@ export default {
 
             this.areButtonsDisabled = false;
         }
+
 
     }
 };
