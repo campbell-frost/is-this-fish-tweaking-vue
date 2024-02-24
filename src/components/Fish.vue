@@ -75,7 +75,7 @@ export default {
     },
     computed: {
         currentFishUrl() {
-            return (`/Fish/Fish${this.currentFishIndex}.jpg`);
+            return (`./Fish/Fish${this.currentFishIndex}.jpg`);
         }
     },
     methods: {
