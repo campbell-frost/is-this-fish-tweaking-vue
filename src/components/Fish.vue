@@ -88,15 +88,11 @@ export default {
             ]
         };
     },
+
     created() {
-        for (let i = 1; i <= this.imageCount; i++) {
-            this.fishList.push({
-                index: i,
-                lockedIn: i === 1
-            });
-        }
         this.loadNextFish();
-    },
+    }
+    ,
     computed: {
         currentFishUrl() {
             return (`/Fish/fish${this.currentFishIndex}.jpg`);
@@ -105,15 +101,23 @@ export default {
     methods: {
         loadNextFish() {
             const remainingFish = this.fishList.filter(fish => !this.userAnswers[fish.index]);
+
             if (remainingFish.length > 0) {
                 const randomIndex = Math.floor(Math.random() * remainingFish.length);
-                this.currentFishIndex = remainingFish[randomIndex].index;
+                const nextFish = remainingFish[randomIndex];
+
+                this.currentFishIndex = nextFish.index;
+                this.userAnswers[nextFish.index] = true; // Marking the fish as shown
                 this.showResult = false;
                 this.resultMessage = '';
             } else {
+                // Reset userAnswers if all fish have been shown
                 this.userAnswers = {};
             }
-        },
+        }
+
+
+        ,
         async checkAnswer(userAnswer) {
             if (this.areButtonsDisabled) return;
             this.areButtonsDisabled = true;
